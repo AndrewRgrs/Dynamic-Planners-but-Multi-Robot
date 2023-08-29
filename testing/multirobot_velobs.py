@@ -1,3 +1,4 @@
+import matplotlib
 import matplotlib.pyplot as plt
 from functools import partial
 
@@ -5,7 +6,7 @@ import sys
 sys.path.insert(1, '../')
 sys.path.insert(1, '../algorithms')
 
-from velocity_obstacle import Velocity_Obstacle
+from algorithms.velocity_obstacle import Velocity_Obstacle
 import multirobot_helpers as mrh
 
 if __name__ == '__main__':
@@ -14,7 +15,10 @@ if __name__ == '__main__':
     
         'iter_max': 100000,
         'robot_radius': 0.5,
-        'timestep': 0.02,
+        'move_dist': 0.01, # how far it can move per timestep
+        'obstacle_FOS': 1, # Repelling force of static obstacles
+        'robot_FOS': 2, # Repelling force of other robots
+        'obstacle_radius': 20 # how far away robot can see other obstacles
         
     }
 
@@ -39,8 +43,11 @@ if __name__ == '__main__':
         start = r1_start,
         goal = r1_goal,
         robot_radius=vel_obs_params['robot_radius'],
-        timestep=vel_obs_params['timestep'],
+        move_dist=vel_obs_params['move_dist'],
         iter_max=vel_obs_params['iter_max'],
+        obstacle_FOS= vel_obs_params['obstacle_FOS'],
+        robot_FOS= vel_obs_params['robot_FOS'],
+        obstacle_radius= vel_obs_params['obstacle_radius'],
         plot_params = {
             'robot': True,
             'goal': True,
@@ -55,8 +62,11 @@ if __name__ == '__main__':
         start = r2_start,
         goal = r2_goal,
         robot_radius=vel_obs_params['robot_radius'],
-        timestep=vel_obs_params['timestep'],
+        move_dist=vel_obs_params['move_dist'],
         iter_max=vel_obs_params['iter_max'],
+        obstacle_FOS= vel_obs_params['obstacle_FOS'],
+        robot_FOS= vel_obs_params['robot_FOS'],
+        obstacle_radius= vel_obs_params['obstacle_radius'],
         plot_params = {
             'robot': True,
             'goal': True,
@@ -71,8 +81,11 @@ if __name__ == '__main__':
         start = r3_start,
         goal = r3_goal,
         robot_radius=vel_obs_params['robot_radius'],
-        timestep=vel_obs_params['timestep'],
+        move_dist=vel_obs_params['move_dist'],
         iter_max=vel_obs_params['iter_max'],
+        obstacle_FOS= vel_obs_params['obstacle_FOS'],
+        robot_FOS= vel_obs_params['robot_FOS'],
+        obstacle_radius= vel_obs_params['obstacle_radius'],
         plot_params = {
             'robot': True,
             'goal': True,
@@ -87,8 +100,11 @@ if __name__ == '__main__':
         start = r4_start,
         goal = r4_goal,
         robot_radius=vel_obs_params['robot_radius'],
-        timestep=vel_obs_params['timestep'],
+        move_dist=vel_obs_params['move_dist'],
         iter_max=vel_obs_params['iter_max'],
+        obstacle_FOS= vel_obs_params['obstacle_FOS'],
+        robot_FOS= vel_obs_params['robot_FOS'],
+        obstacle_radius= vel_obs_params['obstacle_radius'],
         plot_params = {
             'robot': True,
             'goal': True,
@@ -104,15 +120,20 @@ if __name__ == '__main__':
         robot.set_other_robots([other for other in robots if other != robot])
     
     # plotting stuff
+    matplotlib.use('Tkagg')
     fig, ax = plt.subplots(figsize=(12, 8))
     fig.suptitle('Multi-Robot Velocity Obstacle', fontsize=16)
     ax.set_xlim(r1.env.x_range[0], r1.env.x_range[1]+1)
     ax.set_ylim(r1.env.y_range[0], r1.env.y_range[1]+1)
-    bg = fig.canvas.copy_from_bbox(ax.bbox)
+
     plt.gca().set_aspect('equal', adjustable='box')
-    plt.show(block=False)
+
     plt.pause(0.1)
+    bg = fig.canvas.copy_from_bbox(ax.bbox)
     fig.canvas.blit(ax.bbox)
+
+    # event handling
+    fig.canvas.mpl_connect('button_press_event', partial(mrh.update_click_obstacles, robots=robots))
     
     for i in range(vel_obs_params['iter_max']):
         # Velocity Obstacle step for each robot

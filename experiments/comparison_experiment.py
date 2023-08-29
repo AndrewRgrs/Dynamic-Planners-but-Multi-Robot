@@ -1,17 +1,22 @@
+"""
+This script runs each planner a user-selected number of times and saves the compute time and path lengths from each run
+Data gets dumped into a pickle file :)
+"""
+
 import matplotlib.pyplot as plt
 import numpy as np
 from functools import partial
 import multiprocessing
 from tqdm import tqdm
-from joblib import Parallel, delayed
+
 import pickle as pkl
 import time
 import sys
 
-sys.path.insert(1, 'C:/Users/Darie/Documents/UofT/Grad School/Courses/AER1516 - Robot Motion Planning/Project/Code/RRTX/algorithms')
-sys.path.insert(1, 'C:/Users/Darie/Documents/UofT/Grad School/Courses/AER1516 - Robot Motion Planning/Project/Code/RRTX')
+
 
 from agent_instances import *
+
 import multirobot_helpers as mrh
 
 def run_simulation(exp_idx, agent_getter):

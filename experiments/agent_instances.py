@@ -1,12 +1,16 @@
+"""
+Functions to retrieve class instance with settings/parameters for each path planner
+"""
+
 import sys
 sys.path.insert(1, '../')
 sys.path.insert(1, '../algorithms')
-sys.path.insert(1, 'algorithms')
 
-from rrtx import RRTX
-from drrt import DRRT
-from drrt_star import DRRTStar
-from velocity_obstacle import Velocity_Obstacle
+
+from algorithms.rrtx import RRTX
+from algorithms.drrt import DRRT
+from algorithms.drrt_star import DRRTStar
+from algorithms.velocity_obstacle import Velocity_Obstacle
 
 ''' ROBOT START AND GOALS '''
 

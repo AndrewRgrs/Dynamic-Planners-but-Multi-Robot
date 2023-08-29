@@ -1,3 +1,4 @@
+import matplotlib
 import matplotlib.pyplot as plt
 from functools import partial
 
@@ -5,11 +6,11 @@ import sys
 sys.path.insert(1, '../')
 sys.path.insert(1, '../algorithms')
 
-from drrt import DRRT, Node
+from algorithms.drrt import DRRT, Node
 import multirobot_helpers as mrh
 
 if __name__ == '__main__':
-
+    plot_tree = [True, False] *2
     rrt_params = {
         'iter_max': 100_000,
         'robot_radius': 0.5,
@@ -54,7 +55,7 @@ if __name__ == '__main__':
         plot_params = {
             'robot': True,
             'goal': True,
-            'tree': True,
+            'tree': plot_tree[0],
             'path': True,
             'nodes': False,
             'robot_color': 'blue',
@@ -77,7 +78,7 @@ if __name__ == '__main__':
         plot_params = {
             'robot': True,
             'goal': True,
-            'tree': False,
+            'tree': plot_tree[1],
             'path': True,
             'nodes': False,
             'robot_color': 'green',
@@ -100,7 +101,7 @@ if __name__ == '__main__':
         plot_params = {
             'robot': True,
             'goal': True,
-            'tree': False,
+            'tree': plot_tree[2],
             'path': True,
             'nodes': False,
             'robot_color': 'orange',
@@ -123,7 +124,7 @@ if __name__ == '__main__':
         plot_params = {
             'robot': True,
             'goal': True,
-            'tree': False,
+            'tree': plot_tree[3],
             'path': True,
             'nodes': False,
             'robot_color': 'brown',
@@ -138,14 +139,16 @@ if __name__ == '__main__':
         robot.set_other_robots([other for other in robots if other != robot])
 
     # plotting stuff
+    matplotlib.use('TkAgg')
     fig, ax = plt.subplots(figsize=(12, 8))
-    fig.suptitle('RRTX')
+    fig.suptitle('DRRT')
     ax.set_xlim(r1.env.x_range[0], r1.env.x_range[1]+1)
     ax.set_ylim(r1.env.y_range[0], r1.env.y_range[1]+1)
-    bg = fig.canvas.copy_from_bbox(ax.bbox)
+
     plt.gca().set_aspect('equal', adjustable='box')
-    plt.show(block=False)
+
     plt.pause(0.1)
+    bg = fig.canvas.copy_from_bbox(ax.bbox)
     fig.canvas.blit(ax.bbox)
 
     # event handling
