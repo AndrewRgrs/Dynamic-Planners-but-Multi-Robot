@@ -13,7 +13,7 @@ The multi-agent experiment scripts for running each planner on 4 separate robots
 
 The implementations (classes) of each planner can be found within the 'algorithms' folder.
 
-![Gif of 4 robots trying to get around each other each using DRRT* planner](/extra files/extra files/DRRT Star.gif)
+![Gif of 4 robots trying to get around each other each using DRRT* planner](/extra files/DRRT Star.gif)
 
 
 
