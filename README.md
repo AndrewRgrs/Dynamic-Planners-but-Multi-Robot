@@ -14,7 +14,7 @@ The implementations (classes) of each planner can be found within the 'algorithm
 
 
 Example of 4 robots trying to navigate around each other using DRRT* :
-![Gif of 4 robots trying to get around each other each using DRRT* planner](https://github.com/AndrewRgrs/Multi-Agent-Planners/assets/77746490/cd2c316e-75d3-4882-990a-3ec8e5d78b3a)
+![Gif of 4 robots trying to get around each other each using DRRT* planner](https://github.com/AndrewRgrs/Multi-Agent-Planners/assets/77746490/b8169c82-6d30-4778-b216-4a23e8fe6ebb)
 
 
 
