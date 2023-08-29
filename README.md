@@ -1,5 +1,5 @@
 # Multi-Agent-Planners
-Implementation of various path planners for dynamic environments.
+Implementation of various path planners for dynamic environments. The 'dynamic' obstacles for this project were in fact other simulated robots using their own instance of the path planner operating within the same environment.
 This was written for a graduate course project and thus was never meant to be super readable (sorry). 
 
 Planners implemented include:
@@ -7,7 +7,6 @@ Planners implemented include:
 - DRRT*
 - RRTX,
 - Velocity Obstacles.
-
 
 The multi-agent experiment scripts for running each planner on 4 separate robots can be found within the 'testing' folder. Also included in that folder is a script to run a single-robot version of a selected planner.
 
