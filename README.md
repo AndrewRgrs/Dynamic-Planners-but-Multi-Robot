@@ -1,4 +1,4 @@
-# Multi-Agent-Planners
+# Dynamic Path Planners used with Multiple, Non-cooperative Robots
 Implementation of various path planners for dynamic environments. The 'dynamic' obstacles for this project were in fact other simulated robots using their own instance of the path planner operating within the same environment.
 This was written for a graduate course project and thus was never meant to be super readable (sorry). 
 
