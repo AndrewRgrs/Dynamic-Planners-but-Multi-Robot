@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 from functools import partial
 
 import sys
-sys.path.insert(1, '../../')
-sys.path.insert(1, '../../algorithms')
+sys.path.insert(1, '../')
+sys.path.insert(1, '../algorithms')
 
 from algorithms.rrtx import RRTX, Node
 import multirobot_helpers as mrh
